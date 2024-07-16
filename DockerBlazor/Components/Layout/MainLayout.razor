@@ -1,0 +1,28 @@
+﻿@inherits LayoutComponentBase
+
+<MudThemeProvider/>
+<MudDialogProvider/>
+<MudSnackbarProvider/>
+
+<MudLayout>
+    <MudAppBar Fixed="false" Color="Color.Info">
+        <MudGrid>
+            <MudItem xs="2">
+                <MudImage Height="40" Src="docker.png"/>
+            </MudItem>
+            <MudItem xs="8">
+                <MudText Style="color: #fff;" Typo="Typo.h4" Align="Align.Center">DockerBlazor</MudText>
+            </MudItem>
+            <MudItem xs="2"></MudItem>
+        </MudGrid>
+    </MudAppBar>
+    <MudMainContent Class="pa-0 ma-0" Style="min-height: calc(100vh - 64px);">
+        @Body
+    </MudMainContent>
+</MudLayout>
+
+<div id="blazor-error-ui">
+    An unhandled error has occurred.
+    <a href="" class="reload">Reload</a>
+    <a class="dismiss">🗙</a>
+</div>
