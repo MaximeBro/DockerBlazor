@@ -1,0 +1,33 @@
+# Docker Compose, magnifique outil que j'ai découvert sur votre demande qui ma mâche bien du travail.
+# C'est-à-dire toutes les commandes pour créer le réseau, les volumes et lancer les containers.
+# Si cela vous intéresse, vous trouverez tous les détails du projet dans le README sur github.
+
+services: # J'ai créé deux services qui sont en réalité définis dans le même Dockerfile. Je tenterai dans un second temps de faire plusieurs Dockerfile notamment pour avoir un serveur de BD.
+
+  nginx:
+    build:
+      context: /home/docker/ # répertoire où sont situés nos fichiers
+      dockerfile: Dockerfile # notre Dockerfile, j'ai regroupé l'installation de nginx et le run de l'app blazor dans un seul Dockerfile
+    container_name: nginx-app # Le nom de notre container si on souhaite surveiller ses logs ou effectuer toute autre action (exec, terminal intéractif,  ...)
+    ports: # On expose les ports nécessaires au bon fonctionnement du proxy nginx
+      - "8080:80"
+      - "443:443"
+    volumes:
+      - /home/docker/nginx:/etc/nginx/conf.d # On monte un volume depuis le dossier /home/docker/nginx de notre machine au dossier /etc/nginx/conf.d de notre container
+      - /home/docker/certs:/etc/letsencrypt/live/docker.universestudio.net # On monte un volume depuis le dossier /home/docker/certs de notre machine au dossier /etc/letsencrypt/live/docker.universestudio.net de notre container
+    networks:
+      - asp-net-work # Réseau utilisé par le container nginx-app
+  
+  blazor:
+    build:
+      context: /home/docker
+      dockerfile: Dockerfile
+    container_name: blazor-app
+    volumes:
+      - /home/docker/build:/home/asp-app
+    networks:
+      - asp-net-work
+
+networks:
+  asp-net-work: # Le nom de notre réseau utilisé par nos deux containers
+    driver: bridge # Je ne veux pas utiliser de driver host car je ne souhaite pas utiliser le réseau de la machine 
