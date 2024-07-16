@@ -1,6 +1,4 @@
-# Docker Compose, magnifique outil que j'ai découvert sur votre demande qui ma mâche bien du travail.
-# C'est-à-dire toutes les commandes pour créer le réseau, les volumes et lancer les containers.
-# Si cela vous intéresse, vous trouverez tous les détails du projet dans le README sur github.
+# Vous trouverez tous les détails du projet dans le README sur github.
 
 services: # J'ai créé deux services qui sont en réalité définis dans le même Dockerfile. Je tenterai dans un second temps de faire plusieurs Dockerfile notamment pour avoir un serveur de BD.
 
